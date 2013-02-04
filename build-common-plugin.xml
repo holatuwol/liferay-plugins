@@ -1224,25 +1224,6 @@ Please find a solution that does not require portal-impl.jar.
 		<antcall target="clean-portal-dependencies" />
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="jboss" />
-			<then>
-				<if>
-					<equals arg1="${app.server.jboss.version}" arg2="5.1.0" />
-					<then>
-						<echo file="${docroot.dir}/WEB-INF/jboss-classloading.xml" force="true" message="&lt;classloading xmlns="/> 
-						<echo file="${docroot.dir}/WEB-INF/jboss-classloading.xml" append="true">"urn:jboss:classloading:1.0"
-    domain="${plugin.name}"
-    parent-domain="LiferayDomain"
-    top-level-classloader="true"
-    export-all="NON_EMPTY" 
-    import-all="true"</echo>
-						<echo file="${docroot.dir}/WEB-INF/jboss-classloading.xml" append="true" message="&gt;${line.separator}&lt;/classloading&gt; "/>
-					</then>
-				</if>
-			</then>
-		</if>
-
-		<if>
 			<contains string="${app.server.dir}" substring="glassfish" />
 			<then>
 				<zip
