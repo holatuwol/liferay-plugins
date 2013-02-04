@@ -198,7 +198,6 @@
 "gadgets.jsUriTemplate" : "http://%host%/opensocial-portlet/gadgets/js/%js%",</replacevalue>
 		</replace>
 
-
 		<!-- Configure oauth.json -->
 
 		<antcall target="merge-backup-file">
@@ -244,7 +243,6 @@
 			<replacefilter token="/gadgets/" value="/opensocial-portlet/gadgets/" />
 		</replace>
 
-
 		<!-- Fix canonicaldb.json -->
 
 		<tstamp>
@@ -269,7 +267,6 @@
 		/>
 
 		<delete dir="${tstamp.value}" />
-
 
 		<!-- Fix shiro.tld -->
 

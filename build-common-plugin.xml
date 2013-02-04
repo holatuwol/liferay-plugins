@@ -1255,4 +1255,4 @@ Please find a solution that does not require portal-impl.jar.
 			</then>
 		</if>
 	</target>
-	</project>
+</project>
