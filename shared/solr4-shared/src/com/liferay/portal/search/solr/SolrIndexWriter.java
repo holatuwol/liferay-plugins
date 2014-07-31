@@ -191,7 +191,9 @@ public class SolrIndexWriter extends BaseIndexWriter {
 
 		solrInputDocument.addField(localizedName, value, boost);
 
-		if (field.isSortable()) {
+		if (field.isSortable() ||
+			DocumentImpl.isSortableTextField(localizedName)) {
+
 			String sortableFieldName = DocumentImpl.getSortableFieldName(
 				localizedName);
 
@@ -207,6 +209,10 @@ public class SolrIndexWriter extends BaseIndexWriter {
 		for (Field field : fields) {
 			String name = field.getName();
 			float boost = field.getBoost();
+
+			if (DocumentImpl.isSortableFieldName(name)) {
+				continue;
+			}
 
 			if (ArrayUtil.contains(Field.UNSCORED_FIELD_NAMES, name)) {
 				boost = _UNSCORED_FIELDS_BOOST;
@@ -247,7 +253,8 @@ public class SolrIndexWriter extends BaseIndexWriter {
 						LocaleUtil.getDefault());
 
 					if (languageId.equals(defaultLanguageId)) {
-						solrInputDocument.addField(name, value, boost);
+						doAddSolrField(
+							solrInputDocument, field, boost, value, name);
 					}
 
 					String localizedName = DocumentImpl.getLocalizedName(
